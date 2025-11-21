@@ -1,0 +1,34 @@
+{
+  "mails": [
+    {
+      "id": "1762592124292",
+      "createdAt": "2025-11-08T08:55:24.292Z",
+      "subject": "Please schedule meeting",
+      "text": "Please schedule a meeting tomorrow at 3pm with Alice (alice@example.com) to discuss Q4",
+      "raw": {
+        "text": "Please schedule a meeting tomorrow at 3pm with Alice (alice@example.com) to discuss Q4",
+        "subject": "Please schedule meeting"
+      }
+    },
+    {
+      "id": "1762592888971",
+      "createdAt": "2025-11-08T09:08:08.971Z",
+      "subject": "Meeting",
+      "text": "Please schedule a meeting tomorrow at 3pm with Bob (bob@example.com)",
+      "raw": {
+        "text": "Please schedule a meeting tomorrow at 3pm with Bob (bob@example.com)",
+        "subject": "Meeting"
+      }
+    },
+    {
+      "id": "1762597867702",
+      "createdAt": "2025-11-08T10:31:07.702Z",
+      "subject": "Please schedule meeting",
+      "text": "Please schedule a meeting tomorrow 3pm with Alice alice@example.com",
+      "raw": {
+        "text": "Please schedule a meeting tomorrow 3pm with Alice alice@example.com",
+        "subject": "Please schedule meeting"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+node_modules
+npm-debug.log
+Dockerfile*
+.dockerignore
+.git
+.vscode
+.idea
+*.log
+*.sqlite
+../localai-data
+../n8n
+../frontend
+../docker-backups

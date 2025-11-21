@@ -1,0 +1,66 @@
+﻿services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin@n8n.local
+      - N8N_BASIC_AUTH_PASSWORD=AgenticAI123
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n:/home/node/.n8n
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      - N8N_WEBHOOK_URL=http://n8n:5678/webhook/chat-to-calendar
+      - LOCALAI_URL=http://localai:8080
+      - PORT=3100
+      # --- additions for predictable LocalAI behaviour ---
+      - LOCALAI_MODEL=tinyllama-1.1b-chat-v0.3.Q4_K_M
+      - LLM_TIMEOUT_MS=15000
+      - LLM_RETRIES=2
+      - NODE_ENV=production
+    ports:
+      - "3100:3100"
+    depends_on:
+      - n8n
+      - localai
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:3100/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+   build:
+    context: ./frontend
+    dockerfile: Dockerfile.prod
+   restart: unless-stopped
+   ports:
+    - "5173:80"
+   depends_on:
+    - backend
+
+  localai:
+    image: localai/localai:latest
+    container_name: localai
+    restart: unless-stopped
+    ports:
+      - "8000:8080"
+    volumes:
+      - ./localai-data:/data
+    environment:
+      - MODELS_PATH=/data/models
+      - THREADS=8
+    command: ["--address","0.0.0.0:8080"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

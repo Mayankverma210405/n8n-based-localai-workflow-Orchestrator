@@ -1,0 +1,7 @@
+﻿node_modules
+npm-debug.log
+.DS_Store
+*.log
+localai-data
+n8n
+*.sqlite
