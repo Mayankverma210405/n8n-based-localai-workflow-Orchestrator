@@ -324,7 +324,7 @@ MIT License. See `LICENSE` file for details.
 
 ## 📬 Contact
 
-Maintained by: `your-name`
+Maintained by: `Mayankverma`
 For suggestions, issues or contributions, open a GitHub issue.
 
 ---
